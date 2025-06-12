@@ -69,6 +69,53 @@ const Contact = () => {
       {/* Contact Form */}
       <ContactForm />
 
+      {/* How We Handle Your Enquiries */}
+      <section className="py-20 bg-background-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-dark-text mb-6 font-roboto">
+              How We Handle Your Enquiries
+            </h2>
+            <p className="text-xl text-gray-text max-w-3xl mx-auto">
+              Your enquiry information is sent directly to our team for immediate attention.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+              <div className="w-16 h-16 bg-brand-green text-white rounded-lg flex items-center justify-center mx-auto mb-6">
+                <Mail className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-dark-text mb-4">Direct Email Notification</h3>
+              <p className="text-gray-600">
+                All form submissions are sent directly to our admin email: 
+                <span className="font-semibold"> mahadevelectricmobility@gmail.com</span>
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+              <div className="w-16 h-16 bg-brand-green text-white rounded-lg flex items-center justify-center mx-auto mb-6">
+                <Phone className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-dark-text mb-4">Immediate Response</h3>
+              <p className="text-gray-600">
+                Our team monitors enquiries throughout business hours and responds within 24 hours for urgent requests.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+              <div className="w-16 h-16 bg-brand-green text-white rounded-lg flex items-center justify-center mx-auto mb-6">
+                <MapPin className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-dark-text mb-4">Personal Follow-up</h3>
+              <p className="text-gray-600">
+                For service requests and rentals, we'll contact you directly to arrange scheduling and provide detailed information.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Business Hours */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

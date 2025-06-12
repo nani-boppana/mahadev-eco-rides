@@ -15,10 +15,9 @@ const Services = () => {
         'Well-maintained, premium electric bikes',
         'Free helmet and safety gear included',
         'Flexible pickup and delivery options',
-        'Competitive pricing with no hidden charges',
+        'No hidden charges',
         '24/7 roadside assistance'
       ],
-      pricing: 'Starting from ₹150/day',
       link: '/services/rental'
     },
     {
@@ -34,7 +33,6 @@ const Services = () => {
         'Preventive maintenance programs',
         'Genuine parts and accessories'
       ],
-      pricing: 'Service packages from ₹500',
       link: '/services/repair'
     },
     {
@@ -50,7 +48,6 @@ const Services = () => {
         'Warranty and after-sales support',
         'Eco-friendly battery recycling'
       ],
-      pricing: 'Batteries from ₹8,000',
       link: '/services/batteries'
     },
     {
@@ -63,10 +60,8 @@ const Services = () => {
         'Wide range of accessories',
         'Quality assured components',
         'Expert installation service',
-        'Competitive pricing',
         'Quick availability and delivery'
       ],
-      pricing: 'Parts from ₹200',
       link: '/services/parts'
     }
   ];
@@ -120,14 +115,8 @@ const Services = () => {
                   </ul>
                 </div>
 
-                {/* Pricing and CTA */}
+                {/* CTA */}
                 <div className="border-t border-gray-200 pt-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <span className="text-2xl font-bold text-brand-green">{service.pricing}</span>
-                    </div>
-                  </div>
-                  
                   <Link
                     to={service.link}
                     className="w-full bg-brand-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-dark-green transition-colors flex items-center justify-center group"

@@ -13,19 +13,14 @@ const ServiceDetail = () => {
       subtitle: 'Flexible and affordable e-bike rental solutions',
       description: 'Experience the freedom of electric mobility with our premium e-bike rental service. Perfect for daily commuting, weekend adventures, or business needs in Uppal and surrounding areas.',
       features: [
-        'Daily rental starting from ₹150',
-        'Weekly packages with 15% discount',
-        'Monthly plans with up to 30% savings',
-        'Free helmet and safety gear',
+        'Daily, weekly, and monthly rental options',
+        'Well-maintained premium electric bikes',
+        'Free helmet and safety gear included',
         'Comprehensive insurance coverage',
         'Free pickup and delivery within 5km',
         '24/7 roadside assistance',
-        'No maintenance worries'
-      ],
-      plans: [
-        { name: 'Daily Rental', price: '₹150-250', description: 'Perfect for short trips and trials' },
-        { name: 'Weekly Rental', price: '₹900-1,500', description: '15% discount on daily rates' },
-        { name: 'Monthly Rental', price: '₹3,000-5,000', description: 'Best value for regular commuters' }
+        'No maintenance worries',
+        'Flexible rental terms'
       ],
       included: [
         'Premium electric bike',
@@ -50,11 +45,6 @@ const ServiceDetail = () => {
         'Preventive maintenance programs',
         'Emergency repair services'
       ],
-      plans: [
-        { name: 'Basic Service', price: '₹500-800', description: 'Essential maintenance and safety check' },
-        { name: 'Comprehensive Service', price: '₹1,200-2,000', description: 'Complete inspection and optimization' },
-        { name: 'Premium Service', price: '₹2,500-4,000', description: 'Advanced diagnostics and repairs' }
-      ],
       included: [
         'Diagnostic assessment',
         'Safety inspection',
@@ -78,11 +68,6 @@ const ServiceDetail = () => {
         'Warranty coverage',
         'Professional installation'
       ],
-      plans: [
-        { name: 'Standard Battery', price: '₹8,000-12,000', description: '36V, 10-15Ah capacity' },
-        { name: 'Premium Battery', price: '₹15,000-20,000', description: '48V, 15-20Ah capacity' },
-        { name: 'High-Performance', price: '₹22,000-30,000', description: '52V, 20-25Ah capacity' }
-      ],
       included: [
         'Lithium-ion battery',
         'BMS protection system',
@@ -100,16 +85,11 @@ const ServiceDetail = () => {
         'Original manufacturer parts',
         'Quality-assured components',
         'Wide compatibility range',
-        'Competitive pricing',
         'Expert installation available',
         'Quick delivery service',
         'Warranty on parts',
-        'Technical support'
-      ],
-      plans: [
-        { name: 'Basic Parts', price: '₹200-1,000', description: 'Bulbs, fuses, minor components' },
-        { name: 'Performance Parts', price: '₹1,500-5,000', description: 'Motors, controllers, displays' },
-        { name: 'Premium Accessories', price: '₹2,000-8,000', description: 'Lights, carriers, security systems' }
+        'Technical support',
+        'Competitive pricing'
       ],
       included: [
         'Genuine spare parts',
@@ -208,42 +188,37 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Pricing Plans */}
+      {/* Bike Gallery Section */}
       <section className="py-20 bg-background-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-dark-text text-center mb-16 font-roboto">
-            Pricing Plans
+            Our Electric Bike Fleet
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {service.plans.map((plan, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 relative animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {index === 1 && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-brand-green text-white px-4 py-2 rounded-full text-sm font-semibold">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-dark-text mb-2">{plan.name}</h3>
-                  <p className="text-gray-600 mb-4">{plan.description}</p>
-                  <div className="text-3xl font-bold text-brand-green">{plan.price}</div>
-                </div>
-                
-                <Link
-                  to="/contact"
-                  className="w-full bg-brand-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-dark-green transition-colors text-center block"
-                >
-                  Choose Plan
-                </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="/lovable-uploads/1375ca5f-2cee-4b88-85db-1632ec1ec10b.png" 
+                alt="Mahadev Electric Mobility bike fleet - Hero Electric bikes"
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-dark-text mb-2">Hero Electric Fleet</h3>
+                <p className="text-gray-600">Our premium collection of Hero Electric bikes, well-maintained and ready for rental.</p>
               </div>
-            ))}
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src="/lovable-uploads/b6725389-128a-4d41-b0d9-70a0720a4bb6.png" 
+                alt="Mahadev Electric Mobility organized bike parking"
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-dark-text mb-2">Organized Fleet Management</h3>
+                <p className="text-gray-600">Professionally organized and maintained fleet ensuring quality and reliability for all customers.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

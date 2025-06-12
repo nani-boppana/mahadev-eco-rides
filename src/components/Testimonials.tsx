@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star } from 'lucide-react';
 
@@ -11,7 +10,7 @@ const Testimonials = () => {
       rating: 5
     },
     {
-      name: 'Priya Sharma',
+      name: 'Vikram Singh',
       role: 'Business Owner',
       content: 'Professional service and excellent maintenance support. Their team fixed my e-bike battery issue promptly. Great customer service!',
       rating: 5

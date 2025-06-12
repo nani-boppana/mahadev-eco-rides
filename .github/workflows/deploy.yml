@@ -3,11 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # Or your default branch
+      - main
+
+permissions:
+  contents: write   # <- Required for pushing to gh-pages
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -15,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18' # Specify your Node.js version
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
@@ -23,7 +27,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          VITE_BASE_URL: /mahadev-eco-rides/ # Same placeholder as in vite.config.ts
+          VITE_BASE_URL: /mahadev-eco-rides/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

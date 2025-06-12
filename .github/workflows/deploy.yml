@@ -23,7 +23,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          VITE_BASE_URL: /<REPO_NAME>/ # Same placeholder as in vite.config.ts
+          VITE_BASE_URL: /mahadev-eco-rides/ # Same placeholder as in vite.config.ts
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

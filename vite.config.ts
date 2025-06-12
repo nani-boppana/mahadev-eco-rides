@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/<REPO_NAME>/",
+  base: "/mahadev-eco-rides/",
   server: {
     host: "::",
     port: 8080,

@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bike, Wrench, Battery, Settings } from 'lucide-react';
+import { Bike, Wrench, Battery, Settings, ArrowRight } from 'lucide-react';
 
 const ServiceOverview = () => {
   const services = [

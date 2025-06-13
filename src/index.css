@@ -236,6 +236,26 @@
     background-size: 20px 20px;
     animation: particleMove 20s linear infinite;
   }
+  
+  /* Micro-interactions */
+  .micro-bounce {
+    @apply transition-transform duration-150 ease-in-out active:scale-95;
+  }
+  
+  /* Text reveal effect */
+  .text-reveal {
+    @apply bg-gradient-to-r from-transparent via-brand-green/20 to-transparent bg-[length:0%_100%] bg-no-repeat transition-all duration-500 hover:bg-[length:100%_100%];
+  }
+  
+  /* Pulse glow effect */
+  .pulse-glow {
+    @apply animate-pulse shadow-lg shadow-brand-green/50;
+  }
+  
+  /* Ripple effect */
+  .ripple {
+    @apply relative overflow-hidden before:absolute before:top-1/2 before:left-1/2 before:w-0 before:h-0 before:rounded-full before:bg-white/30 before:transition-all before:duration-500 before:transform before:-translate-x-1/2 before:-translate-y-1/2 hover:before:w-80 hover:before:h-80;
+  }
 }
 
 /* Advanced Keyframe Animations */
@@ -368,7 +388,7 @@
 
 /* Advanced Component Styles */
 .card-premium {
-  @apply relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-gray-50 shadow-2xl transition-all duration-500 hover:shadow-3xl hover:-translate-y-2;
+  @apply relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-gray-50 shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2;
 }
 
 .card-premium::before {

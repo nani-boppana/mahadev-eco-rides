@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
+import { sanitizeInput, validateEmail, validatePhone, validateName, validateMessage } from '../utils/inputValidation';
 
 interface FormData {
   name: string;
@@ -26,6 +28,7 @@ const ContactForm = () => {
     message: ''
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const services = [
     'Electric Bike Rental',
@@ -38,20 +41,19 @@ const ContactForm = () => {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     
-    if (formData.name.length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
+    if (!validateName(formData.name)) {
+      newErrors.name = 'Name must be between 2-100 characters';
     }
     
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
+    if (!validateEmail(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
     
-    if (formData.message.length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+    if (!validateMessage(formData.message)) {
+      newErrors.message = 'Message must be between 10-1000 characters';
     }
     
-    if (formData.phone && !/^\+?[\d\s-()]+$/.test(formData.phone)) {
+    if (formData.phone && !validatePhone(formData.phone)) {
       newErrors.phone = 'Please enter a valid phone number';
     }
     
@@ -59,12 +61,32 @@ const ContactForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      console.log('Form submitted:', formData);
+    if (isSubmitting || !validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      // Sanitize all inputs
+      const sanitizedData = {
+        name: sanitizeInput(formData.name),
+        email: sanitizeInput(formData.email),
+        phone: sanitizeInput(formData.phone),
+        service: sanitizeInput(formData.service),
+        message: sanitizeInput(formData.message)
+      };
+
+      console.log('Secure form submission:', sanitizedData);
+      
+      // Simulate form submission delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       toast.success('Thank you! We\'ll get back to you within 24 hours.');
+      
       setFormData({
         name: '',
         email: '',
@@ -73,14 +95,23 @@ const ContactForm = () => {
         message: ''
       });
       setErrors({});
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    
+    // Basic input sanitization on change
+    const sanitizedValue = sanitizeInput(value);
+    
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: sanitizedValue
     }));
     
     // Clear error when user starts typing
@@ -171,10 +202,12 @@ const ContactForm = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors ${
+                    disabled={isSubmitting}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors disabled:opacity-50 ${
                       errors.name ? 'border-red-500' : 'border-light-gray'
                     }`}
                     placeholder="Your full name"
+                    maxLength={100}
                   />
                   {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                 </div>
@@ -189,10 +222,12 @@ const ContactForm = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors ${
+                    disabled={isSubmitting}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors disabled:opacity-50 ${
                       errors.email ? 'border-red-500' : 'border-light-gray'
                     }`}
                     placeholder="your.email@example.com"
+                    maxLength={254}
                   />
                   {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                 </div>
@@ -209,10 +244,12 @@ const ContactForm = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors ${
+                    disabled={isSubmitting}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors disabled:opacity-50 ${
                       errors.phone ? 'border-red-500' : 'border-light-gray'
                     }`}
                     placeholder="+91 XXXXX XXXXX"
+                    maxLength={15}
                   />
                   {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                 </div>
@@ -226,7 +263,8 @@ const ContactForm = () => {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-light-gray rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 border border-light-gray rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors disabled:opacity-50"
                   >
                     <option value="">Select a service</option>
                     {services.map(service => (
@@ -246,19 +284,23 @@ const ContactForm = () => {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors resize-none ${
+                  disabled={isSubmitting}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors resize-none disabled:opacity-50 ${
                     errors.message ? 'border-red-500' : 'border-light-gray'
                   }`}
                   placeholder="Tell us about your requirements or questions..."
+                  maxLength={1000}
                 ></textarea>
                 {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                <p className="text-sm text-gray-500 mt-1">{formData.message.length}/1000 characters</p>
               </div>
               
               <button
                 type="submit"
-                className="w-full bg-brand-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-dark-green transition-colors hover-scale"
+                disabled={isSubmitting}
+                className="w-full bg-brand-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-dark-green transition-colors hover-scale disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
               
               <p className="text-sm text-gray-600 mt-4 text-center">

@@ -196,27 +196,47 @@ const ServiceDetail = () => {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <img 
-                src="/lovable-uploads/1375ca5f-2cee-4b88-85db-1632ec1ec10b.png" 
-                alt="Mahadev Electric Mobility bike fleet - Hero Electric bikes"
-                className="w-full h-64 object-cover"
+                src="/lovable-uploads/a13d4e17-e315-4ba8-9dc3-f62921fef556.png" 
+                alt="Organized fleet of Hero Electric bikes available for rental at Mahadev Electric Mobility"
+                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
               />
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-dark-text mb-2">Hero Electric Fleet</h3>
-                <p className="text-gray-600">Our premium collection of Hero Electric bikes, well-maintained and ready for rental.</p>
+                <h3 className="text-xl font-semibold text-dark-text mb-2">Premium Hero Electric Fleet</h3>
+                <p className="text-gray-600">Our extensive collection of Hero Electric bikes, professionally organized and maintained for optimal performance and reliability.</p>
               </div>
             </div>
             
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <img 
-                src="/lovable-uploads/b6725389-128a-4d41-b0d9-70a0720a4bb6.png" 
-                alt="Mahadev Electric Mobility organized bike parking"
-                className="w-full h-64 object-cover"
+                src="/lovable-uploads/095266d2-1781-4301-bab0-0571d67057d6.png" 
+                alt="Well-maintained electric bike inventory at Mahadev Electric Mobility facility"
+                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
               />
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-dark-text mb-2">Organized Fleet Management</h3>
-                <p className="text-gray-600">Professionally organized and maintained fleet ensuring quality and reliability for all customers.</p>
+                <h3 className="text-xl font-semibold text-dark-text mb-2">Systematic Fleet Management</h3>
+                <p className="text-gray-600">Our systematically organized bike inventory ensures quick availability, proper maintenance, and consistent quality for all rental customers.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <div className="bg-white rounded-lg p-8 shadow-lg max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-dark-text mb-4">Fleet Highlights</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-brand-green mb-2">50+</div>
+                  <p className="text-gray-600">Electric Bikes Available</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-brand-green mb-2">100%</div>
+                  <p className="text-gray-600">Well Maintained</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-brand-green mb-2">24/7</div>
+                  <p className="text-gray-600">Ready for Rental</p>
+                </div>
               </div>
             </div>
           </div>

@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Bike, Wrench, Battery, Settings, CheckCircle, ArrowRight, Phone } from 'lucide-react';
+import { Bike, Wrench, Battery, Settings, CheckCircle, ArrowRight, Phone, Star } from 'lucide-react';
 
 const ServiceDetail = () => {
   const { serviceType } = useParams();
@@ -184,6 +183,71 @@ const ServiceDetail = () => {
                 <p className="text-gray-700 leading-relaxed">{feature}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Testimonials Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-dark-text text-center mb-16 font-roboto">
+            Happy Customers
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-background-gray rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <img 
+                src="/lovable-uploads/571692b9-cccf-4385-a570-6438addbd85e.png" 
+                alt="Satisfied customer with Hero Electric bike from Mahadev Electric Mobility"
+                className="w-full h-80 object-cover hover:scale-105 transition-transform duration-300"
+              />
+              <div className="p-6">
+                <div className="flex items-center mb-3">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <h3 className="text-xl font-semibold text-dark-text mb-2">Excellent Service Experience</h3>
+                <p className="text-gray-600">Our customer enjoying the smooth ride and reliability of our Hero Electric bike rental service. Clean, well-maintained bikes delivered right to your doorstep.</p>
+              </div>
+            </div>
+            
+            <div className="bg-background-gray rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <img 
+                src="/lovable-uploads/58a87c7c-800c-41cb-a217-6da7771c695e.png" 
+                alt="Another happy customer with electric bike rental from Mahadev Electric Mobility"
+                className="w-full h-80 object-cover hover:scale-105 transition-transform duration-300"
+              />
+              <div className="p-6">
+                <div className="flex items-center mb-3">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <h3 className="text-xl font-semibold text-dark-text mb-2">Reliable & Affordable</h3>
+                <p className="text-gray-600">Quality electric bikes with excellent battery performance. Our customers appreciate the affordability and convenience of our rental services in Uppal area.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <div className="bg-brand-green rounded-lg p-8 text-white max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4">Customer Satisfaction Stats</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold mb-2">98%</div>
+                  <p>Customer Satisfaction</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold mb-2">500+</div>
+                  <p>Happy Customers</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold mb-2">4.8★</div>
+                  <p>Average Rating</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

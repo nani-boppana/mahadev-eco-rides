@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { toast } from 'sonner';
 import { sanitizeInput, validateEmail, validatePhone, validateName, validateMessage } from '../utils/inputValidation';
 
@@ -71,7 +71,6 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Sanitize all inputs
       const sanitizedData = {
         name: sanitizeInput(formData.name),
         email: sanitizeInput(formData.email),
@@ -80,9 +79,8 @@ const ContactForm = () => {
         message: sanitizeInput(formData.message)
       };
 
-      console.log('Secure form submission:', sanitizedData);
+      console.log('Form submission:', sanitizedData);
       
-      // Simulate form submission delay
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast.success('Thank you! We\'ll get back to you within 24 hours.');
@@ -105,8 +103,6 @@ const ContactForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    
-    // Basic input sanitization on change
     const sanitizedValue = sanitizeInput(value);
     
     setFormData(prev => ({
@@ -114,7 +110,6 @@ const ContactForm = () => {
       [name]: sanitizedValue
     }));
     
-    // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
         ...prev,
@@ -124,73 +119,80 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-dark-text mb-6 font-roboto">
-            Get In Touch
+          <h2 className="text-4xl md:text-5xl font-bold text-dark-text mb-6 font-roboto">
+            Get In <span className="gradient-text">Touch</span>
           </h2>
-          <p className="text-xl text-gray-text max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Ready to experience eco-friendly mobility? Contact us for rentals, services, or any questions.
           </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Information */}
-          <div className="lg:col-span-1">
+          <div>
             <h3 className="text-2xl font-bold text-dark-text mb-8">Contact Information</h3>
             
             <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-brand-green text-white rounded-lg flex items-center justify-center">
-                  <Phone className="h-6 w-6" />
+              {[
+                {
+                  icon: Phone,
+                  title: 'Phone',
+                  content: '+91 99519 12925',
+                  subtitle: 'Available 24/7',
+                  gradient: 'from-green-500 to-emerald-600'
+                },
+                {
+                  icon: Mail,
+                  title: 'Email',
+                  content: 'mahadevelectricmobility@gmail.com',
+                  subtitle: 'Response within 24 hours',
+                  gradient: 'from-blue-500 to-indigo-600'
+                },
+                {
+                  icon: MapPin,
+                  title: 'Location',
+                  content: 'Gokul Nagar, Mallapur, Hyderabad',
+                  subtitle: 'Serving Uppal area',
+                  gradient: 'from-purple-500 to-pink-600'
+                }
+              ].map((item, index) => (
+                <div key={index} className="flex items-start space-x-4 group hover-lift">
+                  <div className={`w-12 h-12 bg-gradient-to-br ${item.gradient} text-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <item.icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-dark-text">{item.title}</h4>
+                    <p className="text-gray-600">{item.content}</p>
+                    <p className="text-sm text-gray-500">{item.subtitle}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-dark-text">Phone</h4>
-                  <p className="text-gray-600">+91 99519 12925</p>
-                  <p className="text-sm text-gray-500">Available 24/7</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-brand-green text-white rounded-lg flex items-center justify-center">
-                  <Mail className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-dark-text">Email</h4>
-                  <p className="text-gray-600">mahadevelectricmobility@gmail.com</p>
-                  <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-brand-green text-white rounded-lg flex items-center justify-center">
-                  <MapPin className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-dark-text">Location</h4>
-                  <p className="text-gray-600">Gokul Nagar, Mallapur</p>
-                  <p className="text-gray-600">Hyderabad, Telangana</p>
-                  <p className="text-sm text-gray-500">Serving Uppal and surrounding areas</p>
-                </div>
-              </div>
+              ))}
             </div>
             
-            <div className="mt-8 p-6 bg-background-gray rounded-lg">
-              <h4 className="text-lg font-semibold text-dark-text mb-2">Business Hours</h4>
+            {/* Business Hours */}
+            <div className="mt-8 bg-background-gray rounded-2xl p-6">
+              <div className="flex items-center mb-4">
+                <Clock className="h-6 w-6 text-brand-green mr-3" />
+                <h4 className="text-lg font-semibold text-dark-text">Business Hours</h4>
+              </div>
               <div className="text-gray-600 space-y-1">
                 <p>Monday - Saturday: 9:00 AM - 7:00 PM</p>
                 <p>Sunday: 10:00 AM - 6:00 PM</p>
-                <p className="text-sm text-brand-green font-semibold">Emergency services available 24/7</p>
+                <p className="text-brand-green font-semibold mt-2">Emergency services available 24/7</p>
               </div>
             </div>
           </div>
           
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-background-gray rounded-lg p-8">
-              <h3 className="text-2xl font-bold text-dark-text mb-6">Send us a Message</h3>
+            <form onSubmit={handleSubmit} className="bg-background-gray rounded-3xl p-8">
+              <h3 className="text-2xl font-bold text-dark-text mb-8">Send us a Message</h3>
               
+              {/* Form Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-dark-text mb-2">
@@ -203,7 +205,7 @@ const ContactForm = () => {
                     value={formData.name}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors disabled:opacity-50 ${
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-transparent transition-all disabled:opacity-50 ${
                       errors.name ? 'border-red-500' : 'border-light-gray'
                     }`}
                     placeholder="Your full name"
@@ -223,7 +225,7 @@ const ContactForm = () => {
                     value={formData.email}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors disabled:opacity-50 ${
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-transparent transition-all disabled:opacity-50 ${
                       errors.email ? 'border-red-500' : 'border-light-gray'
                     }`}
                     placeholder="your.email@example.com"
@@ -245,7 +247,7 @@ const ContactForm = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors disabled:opacity-50 ${
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-transparent transition-all disabled:opacity-50 ${
                       errors.phone ? 'border-red-500' : 'border-light-gray'
                     }`}
                     placeholder="+91 XXXXX XXXXX"
@@ -256,7 +258,7 @@ const ContactForm = () => {
                 
                 <div>
                   <label htmlFor="service" className="block text-sm font-medium text-dark-text mb-2">
-                    Service Interested In
+                    Service Interest
                   </label>
                   <select
                     id="service"
@@ -264,7 +266,7 @@ const ContactForm = () => {
                     value={formData.service}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 border border-light-gray rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors disabled:opacity-50"
+                    className="w-full px-4 py-3 border border-light-gray rounded-xl focus:ring-2 focus:ring-brand-green focus:border-transparent transition-all disabled:opacity-50"
                   >
                     <option value="">Select a service</option>
                     {services.map(service => (
@@ -285,10 +287,10 @@ const ContactForm = () => {
                   value={formData.message}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-green focus:border-transparent transition-colors resize-none disabled:opacity-50 ${
+                  className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-brand-green focus:border-transparent transition-all resize-none disabled:opacity-50 ${
                     errors.message ? 'border-red-500' : 'border-light-gray'
                   }`}
-                  placeholder="Tell us about your requirements or questions..."
+                  placeholder="Tell us about your requirements..."
                   maxLength={1000}
                 ></textarea>
                 {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
@@ -298,7 +300,7 @@ const ContactForm = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-brand-green text-white py-3 px-6 rounded-lg font-semibold hover:bg-dark-green transition-colors hover-scale disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full button-premium py-4 text-lg font-bold hover-lift disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>

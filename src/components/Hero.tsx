@@ -1,17 +1,12 @@
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Battery, Bike, ArrowRight, Zap, Star } from 'lucide-react';
-
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Simplified Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-brand-green via-dark-green to-light-green"></div>
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-brand-green/20 to-light-green/30"></div>
@@ -51,51 +46,47 @@ const Hero = () => {
         
         {/* Action Buttons */}
         <div className={`flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 transition-all duration-800 ${isVisible ? 'animate-slide-in-bottom animation-delay-600' : 'opacity-0'}`}>
-          <Link
-            to="/services"
-            className="group button-premium px-10 py-4 text-lg font-bold hover-lift morph-button"
-          >
+          <Link to="/services" className="group button-premium px-10 py-4 text-lg font-bold hover-lift morph-button">
             <span className="relative z-10 flex items-center">
               Explore Services
               <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-all duration-300" />
             </span>
           </Link>
           
-          <Link
-            to="/contact"
-            className="group glass border-2 border-white/40 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/20 hover:border-white/60 transition-all duration-500 hover-lift backdrop-blur-lg"
-          >
+          <Link to="/contact" className="group glass border-2 border-white/40 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/20 hover:border-white/60 transition-all duration-500 hover-lift backdrop-blur-lg">
             Get Quote Now
           </Link>
         </div>
         
         {/* Simplified Stats */}
         <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-800 ${isVisible ? 'animate-slide-in-bottom animation-delay-800' : 'opacity-0'}`}>
-          {[
-            { number: "100%", label: "Electric", icon: Zap },
-            { number: "24/7", label: "Support", icon: Bike },
-            { number: "500+", label: "Customers", icon: Star }
-          ].map((stat, index) => (
-            <div key={index} className="text-center group hover-lift">
+          {[{
+          number: "100%",
+          label: "Electric",
+          icon: Zap
+        }, {
+          number: "24/7",
+          label: "Support",
+          icon: Bike
+        }, {
+          number: "500+",
+          label: "Customers",
+          icon: Star
+        }].map((stat, index) => <div key={index} className="text-center group hover-lift">
               <div className="w-16 h-16 mx-auto mb-4 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                 <stat.icon className="h-8 w-8 text-white" />
               </div>
               <div className="text-3xl font-bold mb-2 text-yellow-300">{stat.number}</div>
               <div className="text-lg text-gray-100">{stat.label}</div>
-            </div>
-          ))}
+            </div>)}
         </div>
       </div>
       
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80 text-center">
-        <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center mb-2">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-bounce"></div>
-        </div>
-        <p className="text-sm font-medium">Scroll</p>
+        
+        
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
